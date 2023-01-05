@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
+import com.marqueserick.incidentApi.controller.dto.IncidentDto;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +28,10 @@ public class Incident {
 	private LocalDateTime updatedAt;
 	
 	private LocalDateTime closedAt;
+	
+	public Incident(IncidentDto incident) {
+		this.name = incident.getName();
+		this.description = incident.getDescription();
+	}
 
 }
