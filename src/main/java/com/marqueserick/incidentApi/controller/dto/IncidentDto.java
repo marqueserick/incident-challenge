@@ -34,4 +34,10 @@ public class IncidentDto {
 		this.updatedAt = incident.getUpdatedAt();
 		this.closedAt = incident.getClosedAt();
 	}
+	
+	public IncidentDto(IncidentPartialDto create) {
+		this.name = create.getName();
+		this.description = create.getDescription();
+		this.createdAt = LocalDateTime.now();
+	}
 }

@@ -36,6 +36,7 @@ public class Incident {
 	public Incident(IncidentDto incident) {
 		this.name = incident.getName();
 		this.description = incident.getDescription();
+		this.createdAt = incident.getCreatedAt();
 	}
 
 }
