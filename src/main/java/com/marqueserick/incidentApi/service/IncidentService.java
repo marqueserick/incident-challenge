@@ -50,6 +50,11 @@ public class IncidentService {
 		return new IncidentDto(incident);
 	}
 	
+	public List<IncidentDto> listLatest() {
+		List<Incident> incidents = repository.listLatest(20);
+		return incidents.stream().map(IncidentDto::new).toList();
+	}
+	
 	private Incident getIncidentById(Long id) {
 		Optional<Incident> incident = repository.findById(id);
 		if(incident.isEmpty()) return null;

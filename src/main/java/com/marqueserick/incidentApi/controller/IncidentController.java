@@ -47,11 +47,16 @@ public class IncidentController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<IncidentDto> listIncidentById(@PathVariable("id") Long id){
 		IncidentDto incidentDto = service.listById(id);
 		if(incidentDto == null) return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(incidentDto);
+	}
+	
+	@GetMapping("/latest")
+	public ResponseEntity<List<IncidentDto>> latestIncidents(){
+		return ResponseEntity.ok(service.listLatest());
 	}
 
 }
