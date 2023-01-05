@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.marqueserick</groupId>
-	<artifactId>Incident-API</artifactId>
+	<artifactId>incidentApi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>incidentApi</name>
 	<description>Solution for Challenge - Java Developer</description>
