@@ -16,13 +16,13 @@ public class IncidentDto {
 	private String name;
 	private String description;
 	
-	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss a Z")
+	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss")
 	private LocalDateTime createdAt;
 
-	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss a Z")
+	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss")
 	private LocalDateTime updatedAt;
 	
-	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss a Z")
+	@JsonFormat(pattern = "MM/dd/YYYY HH:mm:ss")
 	private LocalDateTime closedAt;
 	
 	public IncidentDto(Incident incident) {
