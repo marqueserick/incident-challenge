@@ -22,8 +22,8 @@ public class IncidentController {
 	private IncidentService service;
 	
 	@GetMapping
-	public List<IncidentDto> listAll(){
-		return service.listAll();
+	public ResponseEntity<List<IncidentDto>> listAll(){
+		return ResponseEntity.ok(service.listAll());
 	}
 	
 	@PostMapping
