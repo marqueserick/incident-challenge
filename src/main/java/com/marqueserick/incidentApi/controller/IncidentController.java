@@ -37,21 +37,18 @@ public class IncidentController {
 	@PutMapping("/{idIncident}")
 	public ResponseEntity<IncidentDto> updateIncident(@RequestBody IncidentPartialDto dto, @PathVariable("idIncident") Long id){
 		IncidentDto incidentDto = service.updateIncident(dto, id);
-		if(incidentDto == null) return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(incidentDto);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<IncidentDto> deleteIncident(@PathVariable("id") Long id){
-		if(service.deleteIncident(id)) return ResponseEntity.noContent().build();
-		return ResponseEntity.notFound().build();
+		service.deleteIncident(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<IncidentDto> listIncidentById(@PathVariable("id") Long id){
-		IncidentDto incidentDto = service.listById(id);
-		if(incidentDto == null) return ResponseEntity.notFound().build();
-		return ResponseEntity.ok(incidentDto);
+		return ResponseEntity.ok(service.listById(id));
 	}
 	
 	@GetMapping("/latest")

@@ -3,6 +3,8 @@ package com.marqueserick.incidentApi.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,22 +33,18 @@ public class IncidentService {
 
 	public IncidentDto updateIncident(IncidentPartialDto dto, Long id) {
 		Incident incident = getIncidentById(id);
-		if(isIncidentUnavailable(incident)) return null;
 		incident.update(dto);
 		return new IncidentDto(incident);
 	}
 
-	public boolean deleteIncident(Long id) {
+	public void deleteIncident(Long id) {
 		Incident incident = getIncidentById(id);
-		if(isIncidentUnavailable(incident)) return false;
 		incident.delete();
 		repository.save(incident);
-		return true;
 	}
 	
 	public IncidentDto listById(Long id) {
 		Incident incident = getIncidentById(id);
-		if(isIncidentUnavailable(incident)) return null;
 		return new IncidentDto(incident);
 	}
 	
@@ -57,12 +55,8 @@ public class IncidentService {
 	
 	private Incident getIncidentById(Long id) {
 		Optional<Incident> incident = repository.findById(id);
-		if(incident.isEmpty()) return null;
+		if(incident.isEmpty() || incident.get().getClosedAt() != null) throw new EntityNotFoundException();
 		return incident.get();
-	}
-	
-	private boolean isIncidentUnavailable(Incident incident) {
-		return incident == null || incident.getClosedAt() != null;
 	}
 
 }
