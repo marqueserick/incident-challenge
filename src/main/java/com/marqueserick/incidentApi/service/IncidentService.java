@@ -2,6 +2,7 @@ package com.marqueserick.incidentApi.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -21,7 +22,7 @@ public class IncidentService {
 	
 	public List<IncidentDto> listAll(){
 		List<Incident> incidents = repository.listAll();
-		return incidents.stream().map(IncidentDto::new).toList();
+		return incidents.stream().map(IncidentDto::new).collect(Collectors.toList());
 	}
 
 	public IncidentDto createIncident(IncidentPartialDto createIncident) {
@@ -34,6 +35,7 @@ public class IncidentService {
 	public IncidentDto updateIncident(IncidentPartialDto dto, Long id) {
 		Incident incident = getIncidentById(id);
 		incident.update(dto);
+		repository.save(incident);
 		return new IncidentDto(incident);
 	}
 
@@ -50,7 +52,7 @@ public class IncidentService {
 	
 	public List<IncidentDto> listLatest() {
 		List<Incident> incidents = repository.listLatest(20);
-		return incidents.stream().map(IncidentDto::new).toList();
+		return incidents.stream().map(IncidentDto::new).collect(Collectors.toList());
 	}
 	
 	private Incident getIncidentById(Long id) {
