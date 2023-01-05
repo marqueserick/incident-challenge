@@ -18,7 +18,7 @@ public class IncidentService {
 	private IncidentRepository repository;
 	
 	public List<IncidentDto> listAll(){
-		List<Incident> incidents = repository.findAll();
+		List<Incident> incidents = repository.listAll();
 		return incidents.stream().map(IncidentDto::new).toList();
 	}
 
