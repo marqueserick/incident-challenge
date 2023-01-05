@@ -30,16 +30,16 @@ public class IncidentService {
 	}
 
 	public IncidentDto updateIncident(IncidentPartialDto dto, Long id) {
-		Optional<Incident> incidentOptional = repository.findById(id);
-		if(incidentOptional.isEmpty()) return null;
-		Incident incident = incidentOptional.get();
+		Incident incident = getIncidentById(id);
+		if(incident == null || incident.getClosedAt() != null) return null;
+		
 		incident.update(dto);
 		return new IncidentDto(incident);
 	}
 
 	public boolean deleteIncident(Long id) {
 		Incident incident = getIncidentById(id);
-		if(incident == null) return false;
+		if(incident == null || incident.getClosedAt() != null) return false;
 		incident.delete();
 		repository.save(incident);
 		return true;
