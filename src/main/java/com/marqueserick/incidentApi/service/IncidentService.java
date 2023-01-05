@@ -1,6 +1,7 @@
 package com.marqueserick.incidentApi.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,14 @@ public class IncidentService {
 		IncidentDto dto = new IncidentDto(createIncident);
 		Incident incident = new Incident(dto);
 		repository.save(incident);
+		return new IncidentDto(incident);
+	}
+
+	public IncidentDto updateIncident(IncidentPartialDto dto, Long id) {
+		Optional<Incident> incidentOptional = repository.findById(id);
+		if(incidentOptional.isEmpty()) return null;
+		Incident incident = incidentOptional.get();
+		incident.update(dto);
 		return new IncidentDto(incident);
 	}
 
