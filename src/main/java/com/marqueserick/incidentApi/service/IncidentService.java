@@ -31,25 +31,33 @@ public class IncidentService {
 
 	public IncidentDto updateIncident(IncidentPartialDto dto, Long id) {
 		Incident incident = getIncidentById(id);
-		if(incident == null || incident.getClosedAt() != null) return null;
-		
+		if(isIncidentUnavailable(incident)) return null;
 		incident.update(dto);
 		return new IncidentDto(incident);
 	}
 
 	public boolean deleteIncident(Long id) {
 		Incident incident = getIncidentById(id);
-		if(incident == null || incident.getClosedAt() != null) return false;
+		if(isIncidentUnavailable(incident)) return false;
 		incident.delete();
 		repository.save(incident);
 		return true;
-		
+	}
+	
+	public IncidentDto listById(Long id) {
+		Incident incident = getIncidentById(id);
+		if(isIncidentUnavailable(incident)) return null;
+		return new IncidentDto(incident);
 	}
 	
 	private Incident getIncidentById(Long id) {
 		Optional<Incident> incident = repository.findById(id);
 		if(incident.isEmpty()) return null;
 		return incident.get();
+	}
+	
+	private boolean isIncidentUnavailable(Incident incident) {
+		return incident == null || incident.getClosedAt() != null;
 	}
 
 }

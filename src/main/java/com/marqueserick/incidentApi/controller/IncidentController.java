@@ -46,5 +46,12 @@ public class IncidentController {
 		if(service.deleteIncident(id)) return ResponseEntity.noContent().build();
 		return ResponseEntity.notFound().build();
 	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<IncidentDto> listIncidentById(@PathVariable("id") Long id){
+		IncidentDto incidentDto = service.listById(id);
+		if(incidentDto == null) return ResponseEntity.notFound().build();
+		return ResponseEntity.ok(incidentDto);
+	}
 
 }
