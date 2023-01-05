@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marqueserick.incidentApi.model.Incident;
+import com.marqueserick.incidentApi.controller.dto.IncidentDto;
 import com.marqueserick.incidentApi.service.IncidentService;
 
 @RestController
@@ -18,7 +18,7 @@ public class IncidentController {
 	private IncidentService service;
 	
 	@GetMapping
-	public List<Incident> listAll(){
+	public List<IncidentDto> listAll(){
 		return service.listAll();
 	}
 
