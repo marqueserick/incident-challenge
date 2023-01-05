@@ -37,4 +37,19 @@ public class IncidentService {
 		return new IncidentDto(incident);
 	}
 
+	public boolean deleteIncident(Long id) {
+		Incident incident = getIncidentById(id);
+		if(incident == null) return false;
+		incident.delete();
+		repository.save(incident);
+		return true;
+		
+	}
+	
+	private Incident getIncidentById(Long id) {
+		Optional<Incident> incident = repository.findById(id);
+		if(incident.isEmpty()) return null;
+		return incident.get();
+	}
+
 }

@@ -47,4 +47,8 @@ public class Incident {
 		
 	}
 
+	public void delete() {
+		this.closedAt = LocalDateTime.now();
+	}
+
 }
