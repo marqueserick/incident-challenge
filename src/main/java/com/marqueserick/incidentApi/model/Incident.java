@@ -6,13 +6,17 @@ import javax.persistence.*;
 
 import com.marqueserick.incidentApi.controller.dto.IncidentDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name="incident")
 @Entity(name="Incident")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Incident {
 	
 	@Id
