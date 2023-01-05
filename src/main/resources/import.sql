@@ -1,0 +1,2 @@
+insert into incident (id_incident, name, description, created_at) values (1,'Name Test #1', 'Description for name test #1','2023-01-03 11:43:47');
+insert into incident (id_incident, name, description, created_at) values (2,'Name Test #2', 'Description for name test #2','2023-01-04 15:22:13');
