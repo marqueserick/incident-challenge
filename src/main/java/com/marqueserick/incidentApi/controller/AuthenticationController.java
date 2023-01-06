@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.marqueserick.incidentApi.controller.dto.UserDto;
 import com.marqueserick.incidentApi.infra.config.security.TokenService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("auth")
+@Api(tags="Auth")
 public class AuthenticationController {
 	
 	@Autowired
@@ -24,7 +28,8 @@ public class AuthenticationController {
 	private TokenService tokenService;
 	
 	@PostMapping
-	public ResponseEntity<String> login(@RequestBody UserDto dto){
+	@ApiOperation("Generate a token to acess all endpoints")
+	public ResponseEntity<String> authenticate(@RequestBody UserDto dto){
 		
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassoword());
 		Authentication authentication = authManager.authenticate(authToken);

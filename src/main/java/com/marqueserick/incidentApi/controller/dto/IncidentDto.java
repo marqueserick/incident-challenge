@@ -5,11 +5,13 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.marqueserick.incidentApi.model.Incident;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@ApiModel("Incident")
 public class IncidentDto {
 	
 	private Long idIncident;
