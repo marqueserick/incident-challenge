@@ -16,17 +16,31 @@ public class TokenService {
 	@Value("${security.token.secret}")
 	private String secret;
 	
+	private static final String ISSUER_TOKEN= "IncidentAPI";
+	
 	public String generateToken(Authentication auth) {
 		Algorithm algorithm = Algorithm.HMAC256(secret);
 		return JWT.create()
-				.withIssuer("IncidentAPI")
+				.withIssuer(ISSUER_TOKEN)
 				.withSubject(auth.getName())
 				.withExpiresAt(expirationDate())
 				.sign(algorithm);
 	}
 	
+	public String getUser(String token) {
+		try {
+			Algorithm algorithm = Algorithm.HMAC256(secret);
+			return JWT.require(algorithm)
+					.withIssuer(ISSUER_TOKEN)
+					.build()
+					.verify(token)
+					.getSubject();
+		}catch(Exception e) {
+			throw new RuntimeException("Token is expired or invalid");
+		}
+	}
+	
 	private Instant expirationDate() {
 		return LocalDateTime.now().plusHours(24).toInstant(ZoneOffset.of("-03:00"));
 	}
-
 }
