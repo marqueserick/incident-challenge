@@ -25,9 +25,8 @@ Ex: `C:\Users\seu_user\Downloads\jdk-11.0.1\bin`.
 1.Agora, com Java e Maven configurados na sua máquina, abra o Prompt de Comando e navegue até o diretório onde está salvo o projeto.
 Você pode copiar o caminho onde está salvo o IncidentAPI e executar o seguinte comando `cd caminho\do\projeto`. Certifique-se de que está acessando a raiz do projeto. 
 Ex: `C:\Users\seu_user\Downloads\incident-challenge-main`
-1. Execute o seguinte comando: 
+1. Execute o seguinte comando para que o Maven baixe as dependências, compile e execute o projeto: 
 ```
 mvn spring-boot:run
 ```
-O Maven vai baixar as dependências, compilar e executar o projeto.
-1. Entre em `http://localhost:8080/swagger-ui.html` pelo navegador de sua preferência para acessar os endpoints da API por meio do Swagger.
+Entre em `http://localhost:8080/swagger-ui.html`, pelo navegador de sua preferência, para acessar os endpoints da API por meio do Swagger.
