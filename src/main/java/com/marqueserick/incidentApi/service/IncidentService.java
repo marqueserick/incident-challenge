@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marqueserick.incidentApi.controller.dto.IncidentPartialDto;
+import com.marqueserick.incidentApi.infra.exception.NotFoundException;
 import com.marqueserick.incidentApi.controller.dto.IncidentDto;
 import com.marqueserick.incidentApi.model.Incident;
 import com.marqueserick.incidentApi.repository.IncidentRepository;
@@ -57,7 +58,7 @@ public class IncidentService {
 	
 	private Incident getIncidentById(Long id) {
 		Optional<Incident> incident = repository.findById(id);
-		if(incident.isEmpty() || incident.get().getClosedAt() != null) throw new EntityNotFoundException();
+		if(incident.isEmpty() || incident.get().getClosedAt() != null) throw new NotFoundException("Incident not found");
 		return incident.get();
 	}
 

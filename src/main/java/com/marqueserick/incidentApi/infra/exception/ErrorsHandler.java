@@ -2,8 +2,7 @@ package com.marqueserick.incidentApi.infra.exception;
 
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityNotFoundException;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ErrorsHandler {
 	
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity error404() {
-		return ResponseEntity.notFound().build();
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity error404(NotFoundException ex) {
+		return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
