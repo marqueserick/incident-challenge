@@ -14,7 +14,7 @@ import com.marqueserick.incidentApi.controller.dto.UserDto;
 import com.marqueserick.incidentApi.infra.config.security.TokenService;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("auth")
 public class AuthenticationController {
 	
 	@Autowired
