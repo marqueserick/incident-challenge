@@ -24,8 +24,10 @@ public class Incident {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idIncident;
 	
+	@Column(nullable = false)
 	private String name;
 	
+	@Column(nullable = false)
 	private String description;
 	
 	private LocalDateTime createdAt;
