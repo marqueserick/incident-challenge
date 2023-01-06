@@ -1,11 +1,16 @@
 package com.marqueserick.incidentApi.infra.config;
 
+import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import com.marqueserick.incidentApi.model.User;
+
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -23,9 +28,17 @@ public class SwaggerConfig {
 		          .apis(RequestHandlerSelectors.basePackage("com.marqueserick.incidentApi"))
 		          .paths(PathSelectors.ant("/**"))
 		          .build()
-		          .apiInfo(getApiInfo());
+		          .apiInfo(getApiInfo())
+		          .ignoredParameterTypes(User.class)
+		          .globalOperationParameters(Arrays.asList(
+	                        new ParameterBuilder()
+	                                .name("Authorization")
+	                                .description("Authentication header")
+	                                .modelRef(new ModelRef("string"))
+	                                .parameterType("header")
+	                                .required(false).build()));
 	}
-	
+
 	public ApiInfo getApiInfo() {
 		return new ApiInfoBuilder()
 				.title("IncidentAPI")
