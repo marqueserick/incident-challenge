@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-				.antMatchers(HttpMethod.POST,"/login").permitAll()
+				.antMatchers(HttpMethod.POST,"/auth").permitAll()
 				.antMatchers("/**.html").permitAll()
 				.antMatchers("/v2/api-docs").permitAll()
 				.antMatchers("/webjars/**").permitAll()
@@ -55,6 +55,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception{
-		web.ignoring().antMatchers("h2-console/**");
+		web.ignoring().antMatchers("/h2-console/**");
 	}
 }
