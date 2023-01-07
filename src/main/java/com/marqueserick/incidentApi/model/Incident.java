@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 import com.marqueserick.incidentApi.controller.dto.IncidentDto;
 import com.marqueserick.incidentApi.controller.dto.IncidentPartialDto;
+import com.marqueserick.incidentApi.infra.exception.FieldsToUpdateException;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,14 +44,27 @@ public class Incident {
 	}
 
 	public void update(IncidentPartialDto dto) {
-		this.name = dto.getName();
-		this.description = dto.getDescription();
-		this.updatedAt = LocalDateTime.now();
+		boolean isNameValid = isStringValid(dto.getName());
+		boolean isDescriptionValid = isStringValid(dto.getDescription());
+		boolean isUpdated = isNameValid || isDescriptionValid;
+		
+		if(isNameValid) this.name = dto.getName();
+		
+		if(isDescriptionValid) this.description = dto.getDescription();
+		
+		if(isUpdated) this.updatedAt = LocalDateTime.now();
+		else throw new FieldsToUpdateException("Fields name or description should be informed");
 		
 	}
 
 	public void delete() {
 		this.closedAt = LocalDateTime.now();
+	}
+	
+	private boolean isStringValid(String s) {
+		return s != null
+				&& !s.isEmpty()
+				&& !s.isBlank();
 	}
 
 }

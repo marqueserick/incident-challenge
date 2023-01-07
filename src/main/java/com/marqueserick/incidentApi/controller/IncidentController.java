@@ -44,7 +44,7 @@ public class IncidentController {
 	
 	@PutMapping("/{idIncident}")
 	@ApiOperation("Update an incident by Id")
-	public ResponseEntity<IncidentDto> updateIncident(@Valid @RequestBody IncidentPartialDto dto, @PathVariable("idIncident") Long id){
+	public ResponseEntity<IncidentDto> updateIncident(@RequestBody IncidentPartialDto dto, @PathVariable("idIncident") Long id){
 		IncidentDto incidentDto = service.updateIncident(dto, id);
 		return ResponseEntity.ok(incidentDto);
 	}
