@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,11 +33,6 @@ public class ErrorsHandler {
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity error403() {
 		return new ResponseEntity("Not allowed, please inform a valid password.", HttpStatus.FORBIDDEN);
-	}
-	
-	@ExceptionHandler(AccessDeniedException.class)
-	public ResponseEntity error403Denied() {
-		return new ResponseEntity("Not allowed, please inform a valid token.", HttpStatus.FORBIDDEN);
 	}
 
 }
