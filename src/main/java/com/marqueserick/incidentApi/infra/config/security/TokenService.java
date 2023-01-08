@@ -27,16 +27,13 @@ public class TokenService {
 				.sign(algorithm);
 	}
 	
-	public String getUser(String token) {
-		try {
+	public String getUser(String token) {{
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			return JWT.require(algorithm)
 					.withIssuer(ISSUER_TOKEN)
 					.build()
 					.verify(token)
 					.getSubject();
-		}catch(Exception e) {
-			throw new RuntimeException("Token is expired or invalid");
 		}
 	}
 	

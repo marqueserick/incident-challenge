@@ -1,5 +1,7 @@
 package com.marqueserick.incidentApi.infra.config.security;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +51,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/swagger-resources/**").permitAll()
 				.anyRequest().authenticated().and()
 				.csrf().disable()
+				.exceptionHandling()
+				.authenticationEntryPoint( (request, response, exception) ->{
+					response.setContentType("text/plain");
+					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					response.getOutputStream().println("Token has expired or is not valid");
+				})
+				.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
 	}
