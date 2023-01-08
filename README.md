@@ -1,7 +1,7 @@
 # Incident API
 ## Esse projeto é a solução para o desafio de criar uma API Rest para inserir, atualizar, ler e deletar dados de incidentes.
 ### O projeto foi desenvolvido utilizando Spring Framework e as seguintes bibliotecas/módulos:
-* **H2 Database**: Banco de dados embarcado para testar a persistência de dados.
+* **H2 Database**: Banco de dados embutido para testar a persistência de dados.
 * **Spring Data JPA**: 	Para implementar as interfaces de camadas de acessos de dados.
 * **Spring Web**: Para criação da aplicação RESTful, possibilitando a comunicação da aplicação via web.
 * **Lombok**: Utilizada para criação de getters, setters e construtores por meio de anotações providas pela biblioteca.
